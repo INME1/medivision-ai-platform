@@ -1,29 +1,32 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(
-    title="MediVision AI Platform",
-    description="의료 영상 AI 진단 플랫폼",
-    version="1.0.0",
-)
+app = FastAPI(title="MediVision AI Platform")
 
-# CORS 설정
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 개발 중에는 모든 origin 허용
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 @app.get("/")
-async def root():
-    return {"message": "MediVision AI Platform API", "status": "running"}
+def root():
+    return {"message": "🏥 MediVision AI Platform API", "status": "running"}
 
-@app.get("/health")
-async def health_check():
+@app.get("/health") 
+def health():
     return {"status": "healthy"}
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+@app.post("/api/v1/auth/login")
+def login():
+    return {
+        "access_token": "temporary_admin_token",
+        "token_type": "bearer",
+        "user": {"username": "admin", "name": "관리자"}
+    }
+
+@app.get("/api/v1/auth/me")
+def get_me():
+    return {"username": "admin", "name": "관리자"}

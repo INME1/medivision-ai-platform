@@ -1,17 +1,5 @@
-from .patients import Patient
-# from .image import MedicalImage, ImageMetadata
-# from .prediction import AIPrediction, BoundingBox
-from .physicians import Physician, PhysicianReview
-# from .report import DiagnosticReport
-from .audits import AuditLog
-# from .system import SystemSettings
+from .patient import Patient
+from .image import MedicalImage
+from .physician import Physician
 
-__all__ = [
-    "Patient",
-    # "MedicalImage", 
-    # "ImageMetadata",
-    # "AIPrediction",
-    # "BoundingBox", 
-    "Physician",
-    # "PhysicianRe,
-]
+__all__ = ["Patient", "MedicalImage", "Physician"]
